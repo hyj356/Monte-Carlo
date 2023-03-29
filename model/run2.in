@@ -1,0 +1,23 @@
+# 基本设定
+units metal
+boundary p p p
+timestep        0.001
+neighbor 0.0 bin          # neigbor设为0.0, 只计算截断半径以内的原子的势能
+read_data CuTa.lmp
+
+# 定义势函数
+pair_style eam/alloy
+pair_coeff * * ../potential/CuTa.eam.alloy Cu Ta       
+# 定义势能并输出
+variable pot equal pe
+thermo 100
+thermo_style custom step pe ke etotal epair
+run 0
+print "------------------------------------------------------" 
+print "---------------- ${pot} ev ----------------" 
+print "------------------------------------------------------"
+
+# 结果: Cu50Ta50: -21733.5525290429 ev
+# 结果: CoCuFeNiPd: -35939.7479428878 ev
+# 结果: CoCuFeNiPd-2M: -36128.9003788578 ev
+# 结果: CoCuFeNiPd-4M: -36145.3028604582 ev

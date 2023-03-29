@@ -1,0 +1,19 @@
+# 基本设定
+units metal
+boundary p p p
+timestep        0.001
+neighbor 0.0 bin          # neigbor设为0.0, 只计算截断半径以内的原子的势能
+read_data cu.lmp 
+
+# 定义势函数
+pair_style eam
+pair_coeff * * Cu_u3.eam        # 定义一号和二号原子为Cu
+# 定义势能并输出
+variable pot equal pe
+thermo 100
+thermo_style custom step pe ke etotal epair
+run 0
+print "------------------------------------------------------" 
+print "---------------- ${pot} ev ----------------" 
+print "------------------------------------------------------"
+# -14160.0000090988 ev
