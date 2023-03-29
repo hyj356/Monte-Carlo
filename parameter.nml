@@ -1,6 +1,0 @@
-&PARAMETER
-potentialName = '../potential/CoCuFeNiPd.set'
-modelName = '../model/CoCuFeNiPd-0.txt'
-temprature = 300.d0
-iterSteps = 200000
-/
